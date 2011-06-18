@@ -38,8 +38,7 @@ public class Map extends JavaPlugin {
 			final Player player = (Player)sender;
 			getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable()
 				{
-					int count = 0;
-					MapImage mapImage = new MapImage(0,0,128,128);
+					int count = 0;					MapImage mapImage = new MapImage(0,0,128,128);
 					BufferedImage image = new BufferedImage(128, 50, BufferedImage.TYPE_INT_ARGB);
 					Graphics2D g = image.createGraphics();
 					{g.setBackground(new MapColor(null, null).getColor());}
