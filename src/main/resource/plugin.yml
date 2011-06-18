@@ -1,0 +1,8 @@
+name: Map
+main: shamebot.Map.Map
+version: 0.0.1
+commands:
+   color:
+    description:
+    usage:
+     /<command>
