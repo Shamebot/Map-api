@@ -54,7 +54,7 @@ public class MapImage {
 	public MapImage(short mapItemDamage, World world)
 	{
 		data = new MapColumn[128];
-		WorldMap worldMap = Item.MAP.a(new ItemStack(Item.MAP,0,mapItemDamage), ((CraftWorld)world).getHandle());
+		WorldMap worldMap = getWorldMap(mapItemDamage,world);
 		for(short i = 0; i < 128; i++)
 		{
 			byte[] byteData = new byte[128];
@@ -66,6 +66,19 @@ public class MapImage {
 		}
 	}
 
+	public static WorldMap getWorldMap(short mapItemDamage, World world)
+	{
+		return Item.MAP.a(new ItemStack(Item.MAP,0,mapItemDamage), ((CraftWorld)world).getHandle());
+	}
+	public static void setXCenter(short mapItemDamage, World world, int x)
+	{
+		getWorldMap(mapItemDamage,world).b=x;
+	}
+	public static void setZCenter(short mapItemDamage, World world, int z)
+	{
+		getWorldMap(mapItemDamage,world).c=z;
+	}
+	
 	public short getX()
 	{
 		return (short)(x & 0xFF);
@@ -131,6 +144,18 @@ public class MapImage {
 			{
 				int rgb = image.getRGB(i-x, j-y);
 				data[i].setPixel(new MapPixel(rgb >> 16 & 0xFF, rgb >> 8 & 0xFF, rgb & 0xFF, (byte)i, (byte)j), j);
+			}
+		}
+	}
+	
+	public void drawOnMap(short mapItemDamage, World world)
+	{
+		WorldMap worldMap = getWorldMap(mapItemDamage, world);
+		for(int i = 0;i<data.length;i++)
+		{
+			for(int j = 0;j<data[i].getHeight();j++)
+			{
+				worldMap.f[(x+1)*128+y+j]=data[i].getPixel((short) j).getMinecraftColor();
 			}
 		}
 	}
