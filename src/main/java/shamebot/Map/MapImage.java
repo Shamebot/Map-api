@@ -60,7 +60,7 @@ public class MapImage {
 			byte[] byteData = new byte[128];
 			for(short j = 0; j < 128; j++)
 			{
-				byteData[j] = worldMap.f[i*128+j];
+				byteData[j] = worldMap.f[j*128+i];
 			}
 			data[i] = new MapColumn(byteData,(byte)i,(byte)0);
 		}
@@ -155,7 +155,7 @@ public class MapImage {
 		{
 			for(int j = 0;j<data[i].getHeight();j++)
 			{
-				worldMap.f[(x+1)*128+y+j]=data[i].getPixel((short) j).getMinecraftColor();
+				worldMap.f[(y+j)*128+x+i]=data[i].getPixel((short) j).getMinecraftColor();
 			}
 		}
 	}
